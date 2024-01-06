@@ -71,6 +71,12 @@ jobs:
     uses: ./.github/workflows/reusable.yml
     with:
       artifact-name: dist-files
+  print-deploy-result:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print deploy output
+      run: echo "${{ needs.deploy.outputs.result2 }}"
   report:
     needs: [lint, deploy] # on regarde pour un status failure pour toutes les job enstre lint et deploys
     if: failure()
